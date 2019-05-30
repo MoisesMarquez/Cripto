@@ -1,0 +1,16 @@
+{
+  "name": "autoridadcertificadora",
+  "version": "1.0.0",
+  "description": "Proyecto de Cripto",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Moy",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.16.4",
+    "node-rsa": "^1.0.5"
+  }
+}

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="user">
+<head >
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
+    <script src="usercontroller.js"></script>
+    
+    <title>Cripto</title>
+</head>
+<body ng-controller="usercontroller as user">
+    <h1 ng-model="user.nombre">{{user.nombre}}</h1>
+    <input type="text" ng-model="aux">
+    <button ng-click='createUser(aux)'>Crear Usuario</button>
+</body>
+</html>
