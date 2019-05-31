@@ -1,5 +1,5 @@
 angular.module('user', [])
-  .controller('usercontroller', function ($http) {
+  .controller('usercontroller', function ($http,$timeout) {
 
     var scope = this;
 
@@ -21,7 +21,6 @@ angular.module('user', [])
         scope.nombre = response.data.nombre
         scope.privateKey = response.data.privateKey
         scope.created = true;
-
         scope.updateData();
 
       });
@@ -38,7 +37,7 @@ angular.module('user', [])
       if(mensajeAux !== ''){
         console.log('paso 2')
         $http.post('http://localhost:3000/message/' + scope.nombre + "/" + scope.contactoSeleccionado+"/"+mensajeAux).then(function success(response) {
-          
+
         });
         scope.bufferTexto = '';
         mensajeAux='';
@@ -63,7 +62,7 @@ angular.module('user', [])
         });
       }
 
-      setTimeout(scope.updateData,5000);
+      $timeout(scope.updateData,1000);
     };
 
 
