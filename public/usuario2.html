@@ -733,11 +733,11 @@
       </div>
       <div class="messages">
         <ul ng-repeat="mensaje in c.mensajes">
-          <li ng-if="mensaje.nombre == c.nombre" class="sent">
+          <li ng-if="mensaje.nombre == c.nombre" class="replies">
             <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
             <p>{{mensaje.texto}}</p>
           </li>
-          <li ng-if="mensaje.nombre != c.nombre" class="replies">
+          <li ng-if="mensaje.nombre != c.nombre" class="sent">
             <img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
             <p>{{mensaje.texto}}</p>
           </li>
