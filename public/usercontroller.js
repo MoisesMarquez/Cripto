@@ -54,12 +54,10 @@ angular.module('user', [])
 
       if (scope.contactoSeleccionado != '') {
         $http.get('http://localhost:3000/message/' + scope.nombre + "/" + scope.contactoSeleccionado).then(function success(response) {
-          console.log('Limpiando Mensajes')
+          
           scope.mensajes = [];
           //scope.mensajes = response.data;
           scope.mensajes = desCifrarMensajes(response.data);
-          console.log("Mensajes: ");
-          console.log(scope.mensajes);
         });
       }
 
@@ -71,9 +69,7 @@ angular.module('user', [])
       var textoArray = [];
       var contactoSeleccionado = getUser();
       for (var i = 0; i < texto.length; i++) {
-        console.log("Cifrando");
-        console.log(texto[i].charCodeAt(0)+" ^ "+contactoSeleccionado.publicKey[0]+" % "+contactoSeleccionado.publicKey[1]);
-        textoArray[i] = Math.pow(texto[i].charCodeAt(0), contactoSeleccionado.publicKey[0]) % contactoSeleccionado.publicKey[1];
+        textoArray[i] = pow(texto[i].charCodeAt(0), contactoSeleccionado.publicKey[0], contactoSeleccionado.publicKey[1]);
       }
       return textoArray;
     }
@@ -94,20 +90,19 @@ angular.module('user', [])
           if(data[j].nombre == scope.nombre){
 
             caracter = '';
-            console.log("Descifrando");
-            console.log(textoArray[i]+" ^ "+contactoSeleccionado.privateKey[0]+" % "+contactoSeleccionado.privateKey[1]);
-            //var aux = BigInt(Math.pow(textoArray[i],contactoSeleccionado.privateKey[0])%contactoSeleccionado.privateKey[1]);
-            var aux = Math.pow(855,2753) % 3233;
-            console.log(aux);
+            var aux = pow(textoArray[i],contactoSeleccionado.privateKey[0],contactoSeleccionado.privateKey[1]);
 
-            //caracter =   % contactoSeleccionado.privateKey[1];
-            
-            
-            console.log("caracter: "+caracter);
+            caracter = String.fromCharCode(aux);
+            caracteres+=caracter;
+
           }
 
           if(data[j].nombre == scope.contactoSeleccionado){
-            texto += Math.pow(textoArray[i], scope.privateKey[0]) % scope.privateKey[1];
+            var aux = pow(textoArray[i],scope.privateKey[0],scope.privateKey[1]);
+            //Math.pow(textoArray[i], scope.privateKey[0]) % scope.privateKey[1];
+
+            caracter = String.fromCharCode(aux);
+            caracteres+=caracter;
            
           }
           
@@ -128,26 +123,18 @@ angular.module('user', [])
       }
     }
 
+    pow = (numero, potencia,n) => {
+        
+      var result = numero*numero;
+      potencia--;
+      
+      while(potencia!=1){
+          result *= numero;
+          result = result%n;
+          potencia--;
+      }
+      return result;
+  }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
   });

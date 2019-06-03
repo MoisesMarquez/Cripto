@@ -56,13 +56,14 @@ app.get('/message/:emisor/:remitente', function (req, res) {
 
 app.post('/message/:emisor/:remitente/:message', function (req, res) {
 
-    console.log('Mensaje:' + req.params.message);
+    console.log("Mensaje de:  "+req.params.emisor);
+    console.log("Mensaje para:"+req.params.remitente);
+    console.log("Mensaje "+req.params.message);
 
     var messageKey1 = req.params.emisor + req.params.remitente;
     var messageKey2 = req.params.remitente + req.params.emisor;
 
-    console.log('llave 1: '+messageKey1);
-    console.log('llave 2: '+messageKey2);
+    
 
 
     if (mensajes.get(messageKey1) != undefined) {
@@ -76,7 +77,6 @@ app.post('/message/:emisor/:remitente/:message', function (req, res) {
         messages.push(mensaje);
 
         mensajes.set(messageKey1, messages);
-        console.log('Primer If');
     }
 
     if (mensajes.get(messageKey2) != undefined) {
@@ -89,8 +89,6 @@ app.post('/message/:emisor/:remitente/:message', function (req, res) {
         messages.push(mensaje);
 
         mensajes.set(messageKey2, messages);
-
-        console.log('Segundo If');
     } 
     
     if (mensajes.get(messageKey1) == undefined){
